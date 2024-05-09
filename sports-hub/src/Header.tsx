@@ -11,17 +11,40 @@ import {
 export default function Header() {
   const [selectedSport, setSelectedSport] = useState("");
 
+  function currentDate(date: any) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
   // fix Apis to corrspond to the correct request (fix date so its always current)
-  const nbaApi = `https://v2.nba.api-sports.io/games?date=2022-03-09`;
-  const footballApi = `https://v3.football.api-sports.io/games?date=2022-03-09`;
-  const ufcApi = `https://v1.mma.api-sports.io/games?date=2022-03-09`;
-  const f1Api = `https://v1.formula-1.api-sports.io/games?date=2022-03-09`;
-  const aflApi = `https://v1.afl.api-sports.io/games?date=2022-03-09`;
+  const nbaApi = `https://v2.nba.api-sports.io/games?date=${currentDate(
+    Date()
+  )}`;
+  const footballApi = `https://v3.football.api-sports.io/fixtures?date=${currentDate(
+    Date()
+  )}`;
+  const ufcApi = `https://v1.mma.api-sports.io/fights?date=${currentDate(
+    Date()
+  )}`;
+  const f1Api = `https://v1.formula-1.api-sports.io/races?date=${currentDate(
+    Date()
+  )}`;
+  const aflApi = `https://v1.afl.api-sports.io/games?date=${currentDate(
+    Date()
+  )}`;
 
   // Function to handle the click on a sport
   const handleSportClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const sportId = event.currentTarget.id;
     setSelectedSport(sportId);
+    console.log(Date());
   };
   console.log(selectedSport);
 
@@ -38,10 +61,6 @@ export default function Header() {
 
   console.log(apiSelected.data);
 
-  // Render loading state if data is still loading
-
-  // Render fetched data if available
-  // Render fetched data if available
   return (
     <>
       <div className="bg-cyan-900 font-oswald text-white flex flex-col justify-center items-center ">
@@ -89,8 +108,8 @@ export default function Header() {
         </Carousel>
       </div>
       <div>
-        {/* Check if data is available before rendering */}
-        {apiSelected.data && (
+        {apiSelected.isError && <p>Error fetching data</p>}
+        {apiSelected.isSuccess && (
           <>
             <h1>Response: {apiSelected.data.response[0].teams.home.name}</h1>
             {/* Render other properties as needed */}
