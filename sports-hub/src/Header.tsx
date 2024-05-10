@@ -16,7 +16,7 @@ export default function Header() {
   function currentDate(date: any) {
     var d = new Date(date),
       month = "" + (d.getMonth() + 1),
-      day = "" + (d.getDate() - 1),
+      day = "" + d.getDate(),
       year = d.getFullYear();
 
     if (month.length < 2) month = "0" + month;
@@ -25,18 +25,30 @@ export default function Header() {
     return [year, month, day].join("-");
   }
 
-  console.log(currentDate(Date()));
+  function overseasDate(date: any) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
 
-  const nbaApi = `https://v2.nba.api-sports.io/games?date=${currentDate(
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
+  const nbaApi = `https://v2.nba.api-sports.io/games?date=${overseasDate(
     Date()
   )}`;
-  const footballApi = `https://v3.football.api-sports.io/fixtures?date=${currentDate(
+
+  //change back to right date below
+  const footballApi = `https://v3.football.api-sports.io/fixtures?date=2024-05-04&season=${
+    new Date().getFullYear() - 1
+  }`;
+  const ufcApi = `https://v1.mma.api-sports.io/fights?date=${overseasDate(
     Date()
   )}`;
-  const ufcApi = `https://v1.mma.api-sports.io/fights?date=${currentDate(
-    Date()
-  )}`;
-  const f1Api = `https://v1.formula-1.api-sports.io/races?date=${currentDate(
+  const f1Api = `https://v1.formula-1.api-sports.io/races?date=${overseasDate(
     Date()
   )}`;
   const aflApi = `https://v1.afl.api-sports.io/games?date=${currentDate(
@@ -59,8 +71,6 @@ export default function Header() {
       }).then((res) => res.json()),
     enabled: !!selectedSport,
   });
-
-  console.log(apiSelected.data);
 
   return (
     <>
@@ -112,6 +122,7 @@ export default function Header() {
         apiSelected={apiSelected}
         selectedSport={selectedSport}
         nbaApi={nbaApi}
+        footballApi={footballApi}
       />
     </>
   );
