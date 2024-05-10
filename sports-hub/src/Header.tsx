@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import Body from "./Body";
+
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +16,7 @@ export default function Header() {
   function currentDate(date: any) {
     var d = new Date(date),
       month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
+      day = "" + (d.getDate() - 1),
       year = d.getFullYear();
 
     if (month.length < 2) month = "0" + month;
@@ -23,7 +25,8 @@ export default function Header() {
     return [year, month, day].join("-");
   }
 
-  // fix Apis to corrspond to the correct request (fix date so its always current)
+  console.log(currentDate(Date()));
+
   const nbaApi = `https://v2.nba.api-sports.io/games?date=${currentDate(
     Date()
   )}`;
@@ -44,9 +47,7 @@ export default function Header() {
   const handleSportClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const sportId = event.currentTarget.id;
     setSelectedSport(sportId);
-    console.log(Date());
   };
-  console.log(selectedSport);
 
   const apiSelected = useQuery({
     queryKey: ["selectedApi", selectedSport],
@@ -107,15 +108,11 @@ export default function Header() {
           <CarouselNext />
         </Carousel>
       </div>
-      <div>
-        {apiSelected.isError && <p>Error fetching data</p>}
-        {apiSelected.isSuccess && (
-          <>
-            <h1>Response: {apiSelected.data.response[0].teams.home.name}</h1>
-            {/* Render other properties as needed */}
-          </>
-        )}
-      </div>
+      <Body
+        apiSelected={apiSelected}
+        selectedSport={selectedSport}
+        nbaApi={nbaApi}
+      />
     </>
   );
 }
