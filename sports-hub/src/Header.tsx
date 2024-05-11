@@ -28,7 +28,7 @@ export default function Header() {
   function overseasDate(date: any) {
     var d = new Date(date),
       month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
+      day = "" + (d.getDate() - 1),
       year = d.getFullYear();
 
     if (month.length < 2) month = "0" + month;
@@ -37,14 +37,14 @@ export default function Header() {
     return [year, month, day].join("-");
   }
 
-  const nbaApi = `https://v2.nba.api-sports.io/games?date=${overseasDate(
+  const nbaApi = `https://v2.nba.api-sports.io/games?date=${currentDate(
     Date()
   )}`;
 
   //change back to right date below
-  const footballApi = `https://v3.football.api-sports.io/fixtures?date=2024-05-04&season=${
-    new Date().getFullYear() - 1
-  }`;
+  const footballApi = `https://v3.football.api-sports.io/fixtures?date=${overseasDate(
+    Date()
+  )}&season=${new Date().getFullYear() - 1}`;
   const ufcApi = `https://v1.mma.api-sports.io/fights?date=${overseasDate(
     Date()
   )}`;
@@ -74,8 +74,8 @@ export default function Header() {
 
   return (
     <>
-      <div className="bg-cyan-900 font-oswald text-white flex flex-col justify-center items-center ">
-        <h1 className="p-5 pb-20 text-4xl">SPORTS HUB</h1>
+      <div className=" font-oswald text-white flex flex-col justify-center items-center ">
+        <h1 className="m-5 mb-16 text-4xl">SPORTS HUB</h1>
         <Carousel className="w-2/3 text-xl cursor-pointer ">
           <CarouselContent className="ml-28">
             <CarouselItem
