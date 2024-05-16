@@ -45,11 +45,15 @@ export default function Header() {
     Date()
   )}&season=${new Date().getFullYear() - 1}`;
 
-  const ufcApi = `https://v1.mma.api-sports.io/fights?date=2024-05-11&date=2024-05-12`;
+  const ufcApi = `https://v1.mma.api-sports.io/fights?date=2024-05-11&date=${currentDate(
+    Date()
+  )}`;
 
   const aflApi = `https://v1.afl.api-sports.io/games?date=${currentDate(
     Date()
   )}`;
+
+  const nflApi = `https://v1.american-football.api-sports.io/games?date=2023-01-01`;
 
   // Function to handle the click on a sport
   const handleSportClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -105,6 +109,14 @@ export default function Header() {
             >
               🏉 AFL 🏉
             </CarouselItem>
+
+            <CarouselItem
+              id={nflApi}
+              className="basis-1/3"
+              onClick={handleSportClick}
+            >
+              🏈 NFL 🏈
+            </CarouselItem>
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
@@ -117,6 +129,7 @@ export default function Header() {
         footballApi={footballApi}
         ufcApi={ufcApi}
         aflApi={aflApi}
+        nflApi={nflApi}
       />
     </>
   );

@@ -67,7 +67,7 @@
 
 @layer base {
   html {
-    @apply bg-gradient-to-b from-cyan-900 to-slate-800;
+    @apply bg-gradient-to-b from-cyan-900 to-slate-800 min-h-screen;
   }
   * {
     @apply border-border;

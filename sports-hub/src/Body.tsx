@@ -2,10 +2,6 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Body(props: any) {
-  function live(status: string) {
-    return status === "In Play";
-  }
-
   const [selectedLeagueId, setSelectedLeagueId] = useState("");
 
   const setFootballLeague = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,7 +31,7 @@ export default function Body(props: any) {
   if (props.apiSelected) {
     return (
       <>
-        <div className="w-max-screen h-screen flex justify-center py-16">
+        <div className="w-max-screen flex justify-center py-16">
           <div>
             {props.apiSelected.isError && (
               <p className="text-white text-xl">Error! Refresh browser...</p>
@@ -87,19 +83,17 @@ export default function Body(props: any) {
                                 {result.scores.visitors.points}
                               </p>
 
-                              {live(result.status.long) && (
-                                <div>
-                                  <span className="animate-pulse p-1 font-bold text-sm absolute top-4 left-4 text-red-500">
-                                    LIVE
-                                  </span>
-                                  <span
-                                    onClick={updateScore}
-                                    className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
-                                  >
-                                    UPDATE SCORE
-                                  </span>
-                                </div>
-                              )}
+                              <div>
+                                <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
+                                  {result.status.long.toUpperCase()}
+                                </span>
+                                <span
+                                  onClick={updateScore}
+                                  className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                >
+                                  UPDATE SCORE
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -139,11 +133,14 @@ export default function Body(props: any) {
                       </div>
                     )}
                     {selectedLeagueId && (
-                      <div className="grid grid-flow-row grid-cols-2">
+                      <div>
                         {footballApiSelected.isSuccess &&
                           footballApiSelected.data.response.map(
                             (result: any) => (
-                              <div key={result.id}>
+                              <div
+                                className="grid grid-flow-row grid-cols-2"
+                                key={result.id}
+                              >
                                 <div className="m-4 p-4 w-[20rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
                                   <div className="flex justify-between items-center">
                                     <div className="text-center">
@@ -173,6 +170,18 @@ export default function Body(props: any) {
                                     <p>
                                       {result.goals.home} - {result.goals.away}
                                     </p>
+                                    <div>
+                                      <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
+                                        //check that this works ----
+                                        {result.fixture.status.long.toUpperCase()}
+                                      </span>
+                                      <span
+                                        onClick={updateScore}
+                                        className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                      >
+                                        UPDATE SCORE
+                                      </span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -243,13 +252,11 @@ export default function Body(props: any) {
                                 </div>
                               </div>
 
-                              {result.status.long == "Cancelled" && (
-                                <div>
-                                  <span className="p-1 pt-5 font-bold text-sm flex justify-center text-red-500">
-                                    FIGHT CANCELLED
-                                  </span>
-                                </div>
-                              )}
+                              <div>
+                                <span className="animate-pulse p-1 font-bold text-sm flex justify-center items-center text-red-500">
+                                  {result.status.long.toUpperCase()}
+                                </span>
+                              </div>
                             </div>
                           </div>
                         ))}
@@ -299,19 +306,78 @@ export default function Body(props: any) {
                                 {result.scores.away.score}
                               </p>
 
-                              {live(result.status.long) && (
-                                <div>
-                                  <span className="animate-pulse p-1 font-bold text-sm absolute top-4 left-4 text-red-500">
-                                    LIVE
-                                  </span>
-                                  <span
-                                    onClick={updateScore}
-                                    className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
-                                  >
-                                    UPDATE SCORE
-                                  </span>
-                                </div>
-                              )}
+                              <div>
+                                <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
+                                  {result.status.long.toUpperCase()}
+                                </span>
+                                <span
+                                  onClick={updateScore}
+                                  className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                >
+                                  UPDATE SCORE
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {props.apiSelected.data.response.length === 0 && (
+                      <p className="text-white flex justify-center items-center">
+                        NO GAMES ON TODAY!
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* Render NFL response */}
+                {props.selectedSport === props.nflApi && (
+                  <div>
+                    <div className="grid grid-flow-row grid-cols-2">
+                      {props.apiSelected.data.response.map((result: any) => (
+                        <div className="relative" key={result.id}>
+                          <div className="m-4 p-4 w-[20rem] h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                            <div className="flex justify-between items-center">
+                              <div className="text-center">
+                                <h2 className="font-bold">HOME</h2>
+                                <img
+                                  className="h-16 inline-flex justify-center"
+                                  src={`${result.teams.home.logo}`}
+                                  alt="team logo"
+                                />
+                                <p>{result.teams.home.name}</p>
+                              </div>
+                              <div className="text-center">
+                                <h2 className="font-bold">AWAY</h2>
+                                <img
+                                  className="h-16 inline-flex justify-center"
+                                  src={`${result.teams.away.logo}`}
+                                  alt="team logo"
+                                />
+                                <p className="text-center">
+                                  {result.teams.away.name}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex flex-col items-center justify-center pt-6">
+                              <h2 className="font-bold">SCORE</h2>
+                              <p>
+                                {result.scores.home.total} -{" "}
+                                {result.scores.away.total}
+                              </p>
+
+                              <div>
+                                <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
+                                  {result.game.status.long.toUpperCase()}
+                                </span>
+                                <span
+                                  onClick={updateScore}
+                                  className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                >
+                                  UPDATE SCORE
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
