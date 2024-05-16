@@ -41,16 +41,12 @@ export default function Header() {
     Date()
   )}`;
 
-  //change back to right date below
   const footballApi = `https://v3.football.api-sports.io/fixtures?date=${overseasDate(
     Date()
   )}&season=${new Date().getFullYear() - 1}`;
-  const ufcApi = `https://v1.mma.api-sports.io/fights?date=${overseasDate(
-    Date()
-  )}`;
-  const f1Api = `https://v1.formula-1.api-sports.io/races?date=${overseasDate(
-    Date()
-  )}`;
+
+  const ufcApi = `https://v1.mma.api-sports.io/fights?date=2024-05-11&date=2024-05-12`;
+
   const aflApi = `https://v1.afl.api-sports.io/games?date=${currentDate(
     Date()
   )}`;
@@ -85,6 +81,7 @@ export default function Header() {
             >
               🏀 NBA 🏀
             </CarouselItem>
+
             <CarouselItem
               id={footballApi}
               className="basis-1/3"
@@ -92,6 +89,7 @@ export default function Header() {
             >
               ⚽️ FOOTBALL ⚽️
             </CarouselItem>
+
             <CarouselItem
               id={ufcApi}
               className="basis-1/3"
@@ -99,13 +97,7 @@ export default function Header() {
             >
               🥊 UFC 🥊
             </CarouselItem>
-            <CarouselItem
-              id={f1Api}
-              className="basis-1/3"
-              onClick={handleSportClick}
-            >
-              🏁 F1 🏁
-            </CarouselItem>
+
             <CarouselItem
               id={aflApi}
               className="basis-1/3"
@@ -123,6 +115,8 @@ export default function Header() {
         selectedSport={selectedSport}
         nbaApi={nbaApi}
         footballApi={footballApi}
+        ufcApi={ufcApi}
+        aflApi={aflApi}
       />
     </>
   );
