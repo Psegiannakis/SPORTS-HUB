@@ -7,7 +7,12 @@ import Body from "./Body";
 import { ErrorBoundary } from "react-error-boundary";
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+    },
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

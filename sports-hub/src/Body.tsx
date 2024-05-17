@@ -275,44 +275,48 @@ export default function Body(props: any) {
                     <div className="grid grid-flow-row grid-cols-2">
                       {props.apiSelected.data.response.map((result: any) => (
                         <div className="relative" key={result.id}>
-                          <div className="m-4 p-4 w-[20rem] h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
-                            <div className="flex justify-between items-center">
+                          <div className="m-4 p-4 w-[15rem] h-[10rem] md:w-[20rem] md:h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                            <div className="flex justify-between items-center text-xs md:text-lg">
                               <div className="text-center">
                                 <h2 className="font-bold">HOME</h2>
                                 <img
-                                  className="h-16 inline-flex justify-center"
+                                  className="h-10 md:h-16 inline-flex justify-center"
                                   src={`${result.teams.home.logo}`}
                                   alt="team logo"
                                 />
-                                <p>{result.teams.home.name}</p>
+                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
+                                  {result.teams.home.name}
+                                </p>
                               </div>
                               <div className="text-center">
                                 <h2 className="font-bold">AWAY</h2>
                                 <img
-                                  className="h-16 inline-flex justify-center"
+                                  className="h-10 md:h-16 inline-flex justify-center"
                                   src={`${result.teams.away.logo}`}
                                   alt="team logo"
                                 />
-                                <p className="text-center">
+                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
                                   {result.teams.away.name}
                                 </p>
                               </div>
                             </div>
 
-                            <div className="flex flex-col items-center justify-center pt-6">
-                              <h2 className="font-bold">SCORE</h2>
-                              <p>
-                                {result.scores.home.score} -{" "}
-                                {result.scores.away.score}
-                              </p>
+                            <div className="flex flex-col items-center justify-center pt-6 text-xs md:text-lg">
+                              <div className="absolute bottom-8">
+                                <h2 className="font-bold">SCORE</h2>
+                                <p className="text-center">
+                                  {result.scores.home.score} -{" "}
+                                  {result.scores.away.score}
+                                </p>
+                              </div>
 
-                              <div>
-                                <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
+                              <div className="text-[0.5rem] md:text-xs p-1 font-bold">
+                                <span className="animate-pulse  absolute bottom-5 left-5 text-red-500">
                                   {result.status.long.toUpperCase()}
                                 </span>
                                 <span
                                   onClick={updateScore}
-                                  className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                  className=" text-black/30 absolute bottom-5 right-5 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
                                 >
                                   UPDATE SCORE
                                 </span>
@@ -336,44 +340,48 @@ export default function Body(props: any) {
                     <div className="grid grid-flow-row grid-cols-2">
                       {props.apiSelected.data.response.map((result: any) => (
                         <div className="relative" key={result.id}>
-                          <div className="m-4 p-4 w-[20rem] h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
-                            <div className="flex justify-between items-center">
+                          <div className="m-4 p-4 w-[15rem] h-[10rem] md:w-[20rem] md:h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                            <div className="flex justify-between items-center text-xs md:text-lg">
                               <div className="text-center">
                                 <h2 className="font-bold">HOME</h2>
                                 <img
-                                  className="h-16 inline-flex justify-center"
+                                  className="h-10 md:h-16 inline-flex justify-center"
                                   src={`${result.teams.home.logo}`}
                                   alt="team logo"
                                 />
-                                <p>{result.teams.home.name}</p>
+                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
+                                  {result.teams.home.name}
+                                </p>
                               </div>
                               <div className="text-center">
                                 <h2 className="font-bold">AWAY</h2>
                                 <img
-                                  className="h-16 inline-flex justify-center"
+                                  className="h-10 md:h-16 inline-flex justify-center"
                                   src={`${result.teams.away.logo}`}
                                   alt="team logo"
                                 />
-                                <p className="text-center">
+                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
                                   {result.teams.away.name}
                                 </p>
                               </div>
                             </div>
 
-                            <div className="flex flex-col items-center justify-center pt-6">
-                              <h2 className="font-bold">SCORE</h2>
-                              <p>
-                                {result.scores.home.total} -{" "}
-                                {result.scores.away.total}
-                              </p>
+                            <div className="flex flex-col items-center justify-center pt-6 text-xs md:text-lg">
+                              <div className="absolute bottom-8">
+                                <h2 className="font-bold">SCORE</h2>
+                                <p className="text-center">
+                                  {result.scores.home.total} -{" "}
+                                  {result.scores.away.total}
+                                </p>
+                              </div>
 
-                              <div>
-                                <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
+                              <div className="text-[0.5rem] md:text-xs p-1 font-bold">
+                                <span className="animate-pulse  absolute bottom-5 left-5 text-red-500">
                                   {result.game.status.long.toUpperCase()}
                                 </span>
                                 <span
                                   onClick={updateScore}
-                                  className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                  className=" text-black/30 absolute bottom-5 right-5 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
                                 >
                                   UPDATE SCORE
                                 </span>

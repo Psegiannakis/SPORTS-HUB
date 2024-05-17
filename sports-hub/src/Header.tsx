@@ -74,10 +74,10 @@ export default function Header() {
 
   return (
     <>
-      <div className=" font-oswald text-white flex flex-col justify-center items-center ">
-        <h1 className="m-5 mb-16 text-4xl">SPORTS HUB</h1>
-        <Carousel className="w-2/3 text-xl cursor-pointer ">
-          <CarouselContent className="ml-28">
+      <div className=" font-oswald text-white flex flex-col justify-center items-center">
+        <h1 className="title m-5 mb-16 text-2xl md:text-4xl">SPORTS HUB</h1>
+        <Carousel className=" w-2/4 text-[0.5rem] md:w-2/3 sm:text-md md:text-lg lg:text-xl cursor-pointer">
+          <CarouselContent className="sm:ml-28 px-1 size:sm">
             <CarouselItem
               id={nbaApi}
               className="basis-1/3"
