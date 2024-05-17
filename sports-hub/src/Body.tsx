@@ -52,44 +52,48 @@ export default function Body(props: any) {
                     <div className="grid grid-flow-row grid-cols-2">
                       {props.apiSelected.data.response.map((result: any) => (
                         <div className="relative" key={result.id}>
-                          <div className="m-4 p-4 w-[20rem] h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
-                            <div className="flex justify-between items-center">
+                          <div className="m-2 p-2 md:p-4 w-[10rem] h-[8rem] md:w-[22rem] md:h-[16rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                            <div className="flex justify-between items-center text-xs md:text-lg">
                               <div className="text-center">
-                                <h2 className="font-bold">HOME</h2>
+                                <h2 className="font-bold md:pb-3">HOME</h2>
                                 <img
-                                  className="h-16 inline-flex justify-center"
+                                  className="py-1 h-7 md:h-20 inline-flex justify-center"
                                   src={`${result.teams.home.logo}`}
                                   alt="team logo"
                                 />
-                                <p>{result.teams.home.name}</p>
+                                <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
+                                  {result.teams.home.name}
+                                </p>
                               </div>
                               <div className="text-center">
-                                <h2 className="font-bold">AWAY</h2>
+                                <h2 className="font-bold md:pb-3">AWAY</h2>
                                 <img
-                                  className="h-16 inline-flex justify-center"
+                                  className="py-1 h-7 md:h-20 inline-flex justify-center"
                                   src={`${result.teams.visitors.logo}`}
                                   alt="team logo"
                                 />
-                                <p className="text-center">
+                                <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
                                   {result.teams.visitors.name}
                                 </p>
                               </div>
                             </div>
 
-                            <div className="flex flex-col items-center justify-center pt-6">
-                              <h2 className="font-bold">SCORE</h2>
-                              <p>
-                                {result.scores.home.points} -{" "}
-                                {result.scores.visitors.points}
-                              </p>
+                            <div className="flex flex-col items-center justify-center pt-6 text-[0.5rem] md:text-lg">
+                              <div className="absolute bottom-7">
+                                <h2 className="font-bold">SCORE</h2>
+                                <p className="text-center">
+                                  {result.scores.home.points} -{" "}
+                                  {result.scores.visitors.points}
+                                </p>
+                              </div>
 
-                              <div>
-                                <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
+                              <div className="text-[0.4rem] md:text-xs p-1 font-bold">
+                                <span className="animate-pulse  absolute bottom-3 left-3 text-red-500">
                                   {result.status.long.toUpperCase()}
                                 </span>
                                 <span
                                   onClick={updateScore}
-                                  className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                  className=" text-black/30 absolute bottom-3 right-3 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
                                 >
                                   UPDATE SCORE
                                 </span>
@@ -110,9 +114,9 @@ export default function Body(props: any) {
                 {/* Render FOOTBALL response */}
                 {props.selectedSport === props.footballApi && (
                   <>
-                    <div className="flex justify-center items-center pb-10">
+                    <div className="flex justify-center items-center pb-6 md:pb-10">
                       <select
-                        className="w-60 bg-sky-800 rounded h-8 text-white text-center font-sans"
+                        className="w-50 md:w-80 bg-sky-800 rounded h-6 md:h-8 text-sm md:text-lg text-white text-center font-sans"
                         name="league"
                         id="league"
                         onChange={setFootballLeague}
@@ -134,67 +138,77 @@ export default function Body(props: any) {
                     )}
                     {selectedLeagueId && (
                       <div>
-                        {footballApiSelected.isSuccess &&
-                          footballApiSelected.data.response.map(
-                            (result: any) => (
-                              <div
-                                className="grid grid-flow-row grid-cols-2"
-                                key={result.id}
-                              >
-                                <div className="m-4 p-4 w-[20rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
-                                  <div className="flex justify-between items-center">
-                                    <div className="text-center">
-                                      <h2 className="font-bold">HOME</h2>
-                                      <img
-                                        className="h-16 inline-flex justify-center"
-                                        src={`${result.teams.home.logo}`}
-                                        alt="team logo"
-                                      />
-                                      <p>{result.teams.home.name}</p>
+                        <div className="grid grid-flow-row grid-cols-2">
+                          {footballApiSelected.isSuccess &&
+                            footballApiSelected.data.response.map(
+                              (result: any) => (
+                                <div key={result.id} className="relative">
+                                  <div className="m-2 p-2 md:p-4 w-[10rem] h-[8rem] md:w-[22rem] md:h-[16rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                                    <div className="flex justify-between items-center text-xs md:text-lg">
+                                      <div className="text-center">
+                                        <h2 className="font-bold md:pb-3">
+                                          HOME
+                                        </h2>
+                                        <img
+                                          className="py-1 h-7 md:h-20 inline-flex justify-center"
+                                          src={`${result.teams.home.logo}`}
+                                          alt="team logo"
+                                        />
+                                        <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
+                                          {result.teams.home.name}
+                                        </p>
+                                      </div>
+                                      <div className="text-center">
+                                        <h2 className="font-bold md:pb-3">
+                                          AWAY
+                                        </h2>
+                                        <img
+                                          className="py-1 h-7 md:h-20 inline-flex justify-center"
+                                          src={`${result.teams.away.logo}`}
+                                          alt="team logo"
+                                        />
+                                        <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
+                                          {result.teams.away.name}
+                                        </p>
+                                      </div>
                                     </div>
-                                    <div className="text-center">
-                                      <h2 className="font-bold">AWAY</h2>
-                                      <img
-                                        className="h-16 inline-flex justify-center"
-                                        src={`${result.teams.away.logo}`}
-                                        alt="team logo"
-                                      />
-                                      <p className="text-center">
-                                        {result.teams.away.name}
-                                      </p>
-                                    </div>
-                                  </div>
 
-                                  <div className="flex flex-col items-center justify-center pt-6">
-                                    <h2 className="font-bold">SCORE</h2>
-                                    <p>
-                                      {result.goals.home} - {result.goals.away}
-                                    </p>
-                                    <div>
-                                      <span className="animate-pulse p-1 font-bold text-sm absolute bottom-4 left-4 text-red-500">
-                                        //check that this works ----
-                                        {result.fixture.status.long.toUpperCase()}
-                                      </span>
-                                      <span
-                                        onClick={updateScore}
-                                        className="p-1 font-bold text-xs text-black/30 absolute bottom-4 right-4 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
-                                      >
-                                        UPDATE SCORE
-                                      </span>
+                                    <div className="flex flex-col items-center justify-center pt-6 text-[0.5rem] md:text-lg">
+                                      <div className="absolute bottom-7">
+                                        <h2 className="font-bold md:pb-3">
+                                          SCORE
+                                        </h2>
+                                        <p className="text-center">
+                                          {result.goals.home} -{" "}
+                                          {result.goals.away}
+                                        </p>
+                                      </div>
+
+                                      <div className="text-[0.4rem] md:text-xs p-1 font-bold">
+                                        <span className="animate-pulse  absolute bottom-3 left-3 text-red-500">
+                                          {result.fixture.status.long.toUpperCase()}
+                                        </span>
+                                        <span
+                                          onClick={updateScore}
+                                          className=" text-black/30 absolute bottom-3 right-3 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                        >
+                                          UPDATE SCORE
+                                        </span>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            )
+                              )
+                            )}
+                        </div>{" "}
+                        {footballApiSelected.isSuccess &&
+                          footballApiSelected.data.response.length === 0 && (
+                            <p className="text-white flex justify-center items-center">
+                              NO GAMES ON TODAY!
+                            </p>
                           )}
                       </div>
                     )}
-                    {footballApiSelected.isSuccess &&
-                      footballApiSelected.data.response.length === 0 && (
-                        <p className="text-white flex justify-center items-center">
-                          NO GAMES ON TODAY!
-                        </p>
-                      )}
                   </>
                 )}
 
@@ -205,28 +219,30 @@ export default function Body(props: any) {
                       <div className="grid grid-flow-row grid-cols-2">
                         {props.apiSelected.data.response.map((result: any) => (
                           <div className="relative" key={result.id}>
-                            <div className="m-4 p-4 w-[20rem] h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
-                              <span className="text-sm pb-5 font-bold flex justify-center items-center text-center">
+                            <div className="m-2 p-2 md:p-4 w-[10rem] h-[8rem] md:w-[22rem] md:h-[16rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                              <span className="text-[0.5rem]  md:text-lg pb-1 md:pb-5 font-bold flex justify-center items-center text-center">
                                 {result.slug}
                               </span>
-                              <span className="pb-5  flex flex-col justify-center items-center">
-                                <p className="font-bold">DIVISION</p>
+                              <span className="text-[0.5rem] md:text-[1rem] pb-1 flex flex-col justify-center items-center">
+                                <p className="font-bold  md:text-[1rem]">
+                                  DIVISION
+                                </p>
                                 {result.category}
                               </span>
                               <div className="flex justify-between items-center">
                                 <div className="text-center">
                                   <img
-                                    className="h-16 inline-flex justify-center"
+                                    className="py-1 h-7 md:h-20 inline-flex justify-center"
                                     src={`${result.fighters.first.logo}`}
                                     alt="👤 no image"
                                   />
                                   <span>
                                     {result.fighters.first.winner ? (
-                                      <p className="font-bold text-green-500 text-center">
+                                      <p className="px-1 font-bold text-green-500 text-center text-[0.5rem] md:text-[1rem]">
                                         {result.fighters.first.name}
                                       </p>
                                     ) : (
-                                      <p className="text-center">
+                                      <p className="px-1 text-center text-[0.5rem] md:text-[1rem]">
                                         {result.fighters.first.name}
                                       </p>
                                     )}
@@ -234,17 +250,17 @@ export default function Body(props: any) {
                                 </div>
                                 <div className="text-center">
                                   <img
-                                    className="h-16 inline-flex justify-center"
+                                    className="py-1 h-7 md:h-20 inline-flex justify-center"
                                     src={`${result.fighters.second.logo}`}
                                     alt="team logo"
                                   />
                                   <span>
                                     {result.fighters.second.winner ? (
-                                      <p className="font-bold text-green-500 text-center">
+                                      <p className="px-1 font-bold text-green-500 text-center text-[0.5rem] md:text-[1rem]">
                                         {result.fighters.second.name}
                                       </p>
                                     ) : (
-                                      <p className="text-center">
+                                      <p className="px-1 text-center text-[0.5rem] md:text-[1rem]">
                                         {result.fighters.second.name}
                                       </p>
                                     )}
@@ -252,8 +268,8 @@ export default function Body(props: any) {
                                 </div>
                               </div>
 
-                              <div>
-                                <span className="animate-pulse p-1 font-bold text-sm flex justify-center items-center text-red-500">
+                              <div className="flex justify-center">
+                                <span className="animate-pulse p-3 md:p-1 font-bold text-[0.4rem] md:text-sm absolute bottom-1 md:bottom-3 text-red-500">
                                   {result.status.long.toUpperCase()}
                                 </span>
                               </div>
@@ -275,34 +291,34 @@ export default function Body(props: any) {
                     <div className="grid grid-flow-row grid-cols-2">
                       {props.apiSelected.data.response.map((result: any) => (
                         <div className="relative" key={result.id}>
-                          <div className="m-4 p-4 w-[15rem] h-[10rem] md:w-[20rem] md:h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                          <div className="m-2 p-2 md:p-4 w-[10rem] h-[8rem] md:w-[22rem] md:h-[16rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
                             <div className="flex justify-between items-center text-xs md:text-lg">
                               <div className="text-center">
-                                <h2 className="font-bold">HOME</h2>
+                                <h2 className="font-bold md:pb-3">HOME</h2>
                                 <img
-                                  className="h-10 md:h-16 inline-flex justify-center"
+                                  className="py-1 h-7 md:h-20 inline-flex justify-center"
                                   src={`${result.teams.home.logo}`}
                                   alt="team logo"
                                 />
-                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
+                                <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
                                   {result.teams.home.name}
                                 </p>
                               </div>
                               <div className="text-center">
-                                <h2 className="font-bold">AWAY</h2>
+                                <h2 className="font-bold md:pb-3">AWAY</h2>
                                 <img
-                                  className="h-10 md:h-16 inline-flex justify-center"
+                                  className="py-1 h-7 md:h-20 inline-flex justify-center"
                                   src={`${result.teams.away.logo}`}
                                   alt="team logo"
                                 />
-                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
+                                <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
                                   {result.teams.away.name}
                                 </p>
                               </div>
                             </div>
 
-                            <div className="flex flex-col items-center justify-center pt-6 text-xs md:text-lg">
-                              <div className="absolute bottom-8">
+                            <div className="flex flex-col items-center justify-center pt-6 text-[0.5rem] md:text-lg">
+                              <div className="absolute bottom-7">
                                 <h2 className="font-bold">SCORE</h2>
                                 <p className="text-center">
                                   {result.scores.home.score} -{" "}
@@ -310,13 +326,13 @@ export default function Body(props: any) {
                                 </p>
                               </div>
 
-                              <div className="text-[0.5rem] md:text-xs p-1 font-bold">
-                                <span className="animate-pulse  absolute bottom-5 left-5 text-red-500">
+                              <div className="text-[0.4rem] md:text-xs p-1 font-bold">
+                                <span className="animate-pulse  absolute bottom-3 left-3 text-red-500">
                                   {result.status.long.toUpperCase()}
                                 </span>
                                 <span
                                   onClick={updateScore}
-                                  className=" text-black/30 absolute bottom-5 right-5 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                  className=" text-black/30 absolute bottom-3 right-3 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
                                 >
                                   UPDATE SCORE
                                 </span>
@@ -340,34 +356,34 @@ export default function Body(props: any) {
                     <div className="grid grid-flow-row grid-cols-2">
                       {props.apiSelected.data.response.map((result: any) => (
                         <div className="relative" key={result.id}>
-                          <div className="m-4 p-4 w-[15rem] h-[10rem] md:w-[20rem] md:h-[15rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
+                          <div className="m-2 p-2 md:p-4 w-[10rem] h-[8rem] md:w-[22rem] md:h-[16rem] bg-slate-200/90 rounded text-black border-4 outline-1 hover:shadow-[1px_1px_7px_5px_#718096,-3px_3px_40px_5px_#7f9cf5] hover:shadow-slate-400 hover:transition">
                             <div className="flex justify-between items-center text-xs md:text-lg">
                               <div className="text-center">
-                                <h2 className="font-bold">HOME</h2>
+                                <h2 className="font-bold md:pb-3">HOME</h2>
                                 <img
-                                  className="h-10 md:h-16 inline-flex justify-center"
+                                  className="py-1 h-7 md:h-20 inline-flex justify-center"
                                   src={`${result.teams.home.logo}`}
                                   alt="team logo"
                                 />
-                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
+                                <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
                                   {result.teams.home.name}
                                 </p>
                               </div>
                               <div className="text-center">
-                                <h2 className="font-bold">AWAY</h2>
+                                <h2 className="font-bold md:pb-3">AWAY</h2>
                                 <img
-                                  className="h-10 md:h-16 inline-flex justify-center"
+                                  className="py-1 h-7 md:h-20 inline-flex justify-center"
                                   src={`${result.teams.away.logo}`}
                                   alt="team logo"
                                 />
-                                <p className="text-[0.6rem] md:text-[1rem] leading-3 md:leading-5">
+                                <p className="text-[0.5rem] px-1 md:text-[1rem] leading-3 md:leading-5">
                                   {result.teams.away.name}
                                 </p>
                               </div>
                             </div>
 
-                            <div className="flex flex-col items-center justify-center pt-6 text-xs md:text-lg">
-                              <div className="absolute bottom-8">
+                            <div className="flex flex-col items-center justify-center pt-6 text-[0.5rem] md:text-lg">
+                              <div className="absolute bottom-7">
                                 <h2 className="font-bold">SCORE</h2>
                                 <p className="text-center">
                                   {result.scores.home.total} -{" "}
@@ -375,13 +391,13 @@ export default function Body(props: any) {
                                 </p>
                               </div>
 
-                              <div className="text-[0.5rem] md:text-xs p-1 font-bold">
-                                <span className="animate-pulse  absolute bottom-5 left-5 text-red-500">
+                              <div className="text-[0.4rem] md:text-xs p-1 font-bold">
+                                <span className="animate-pulse  absolute bottom-3 left-3 text-red-500">
                                   {result.game.status.long.toUpperCase()}
                                 </span>
                                 <span
                                   onClick={updateScore}
-                                  className=" text-black/30 absolute bottom-5 right-5 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
+                                  className=" text-black/30 absolute bottom-3 right-3 hover:text-black/70 hover:transition-all hover:ease-linear hover:cursor-pointer"
                                 >
                                   UPDATE SCORE
                                 </span>

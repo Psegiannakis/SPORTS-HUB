@@ -37,23 +37,17 @@ export default function Header() {
     return [year, month, day].join("-");
   }
 
-  const nbaApi = `https://v2.nba.api-sports.io/games?date=${currentDate(
-    Date()
-  )}`;
+  const nbaApi = `https://v2.nba.api-sports.io/games?date=2024-04-14`; //test data: 2024-04-14 // use current
 
-  const footballApi = `https://v3.football.api-sports.io/fixtures?date=${overseasDate(
-    Date()
-  )}&season=${new Date().getFullYear() - 1}`;
+  const footballApi = `https://v3.football.api-sports.io/fixtures?date=2024-05-11&season=${
+    new Date().getFullYear() - 1
+  }`; //test data: 2024-05-11 // use overseas
 
-  const ufcApi = `https://v1.mma.api-sports.io/fights?date=2024-05-11&date=${currentDate(
-    Date()
-  )}`;
+  const ufcApi = `https://v1.mma.api-sports.io/fights?date=2024-04-14`; //test data: 2024-04-14 // use current
 
-  const aflApi = `https://v1.afl.api-sports.io/games?date=${currentDate(
-    Date()
-  )}`;
+  const aflApi = `https://v1.afl.api-sports.io/games?date=2024-04-13`; //test data: 2024-04-13 // use current
 
-  const nflApi = `https://v1.american-football.api-sports.io/games?date=2023-01-01`;
+  const nflApi = `https://v1.american-football.api-sports.io/games?date=2023-01-01`; //test data: 2023-01-01 // use overseas
 
   // Function to handle the click on a sport
   const handleSportClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -74,10 +68,11 @@ export default function Header() {
 
   return (
     <>
-      <div className=" font-oswald text-white flex flex-col justify-center items-center">
-        <h1 className="title m-5 mb-16 text-2xl md:text-4xl">SPORTS HUB</h1>
-        <Carousel className=" w-2/4 text-[0.5rem] md:w-2/3 sm:text-md md:text-lg lg:text-xl cursor-pointer">
-          <CarouselContent className="sm:ml-28 px-1 size:sm">
+      <div className="font-oswald text-white flex flex-col justify-center items-center">
+        <h1 className="m-5 mb-8 md:mb-16 text-2xl md:text-4xl">SPORTS HUB</h1>
+
+        <Carousel className="w-7/12  text-[0.5rem] md:w-2/3 sm:text-md md:text-lg lg:text-xl cursor-pointer">
+          <CarouselContent className="xl:ml-28 ml-2">
             <CarouselItem
               id={nbaApi}
               className="basis-1/3"
@@ -118,6 +113,7 @@ export default function Header() {
               🏈 NFL 🏈
             </CarouselItem>
           </CarouselContent>
+
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
