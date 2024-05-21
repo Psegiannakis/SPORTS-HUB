@@ -69,7 +69,10 @@ export default function Header() {
   return (
     <>
       <div className="font-oswald text-white flex flex-col justify-center items-center">
-        <h1 className="m-5 mb-8 md:mb-16 text-2xl md:text-4xl">SPORTS HUB</h1>
+        <h1 className="m-5 text-2xl md:text-4xl">SPORTS HUB</h1>
+        <p className="mb-8 md:mb-16">
+          YOUR FAVOURITE SPORTS, ALL IN THE ONE PLACE
+        </p>
 
         <Carousel className="w-7/12  text-[0.5rem] md:w-2/3 sm:text-md md:text-lg lg:text-xl cursor-pointer">
           <CarouselContent className="xl:ml-28 ml-2">
