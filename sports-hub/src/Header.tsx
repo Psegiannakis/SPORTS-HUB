@@ -37,17 +37,25 @@ export default function Header() {
     return [year, month, day].join("-");
   }
 
-  const nbaApi = `https://v2.nba.api-sports.io/games?date=2024-04-14`; //test data: 2024-04-14 // use current
+  const nbaApi = `https://v2.nba.api-sports.io/games?date=${currentDate(
+    Date()
+  )}`; //test data: 2024-04-14 // use current
 
-  const footballApi = `https://v3.football.api-sports.io/fixtures?date=2024-05-11&season=${
-    new Date().getFullYear() - 1
-  }`; //test data: 2024-05-11 // use overseas
+  const footballApi = `https://v3.football.api-sports.io/fixtures?date=${overseasDate(
+    Date()
+  )}&season=${new Date().getFullYear() - 1}`; //test data: 2024-05-11 // use overseas
 
-  const ufcApi = `https://v1.mma.api-sports.io/fights?date=2024-04-14`; //test data: 2024-04-14 // use current
+  const ufcApi = `https://v1.mma.api-sports.io/fights?date=${currentDate(
+    Date()
+  )}`; //test data: 2024-04-14 // use current
 
-  const aflApi = `https://v1.afl.api-sports.io/games?date=2024-04-13`; //test data: 2024-04-13 // use current
+  const aflApi = `https://v1.afl.api-sports.io/games?date=${currentDate(
+    Date()
+  )}`; //test data: 2024-04-13 // use current
 
-  const nflApi = `https://v1.american-football.api-sports.io/games?date=2023-01-01`; //test data: 2023-01-01 // use overseas
+  const nflApi = `https://v1.american-football.api-sports.io/games?date=${overseasDate(
+    Date()
+  )}`; //test data: 2023-01-01 // use overseas
 
   // Function to handle the click on a sport
   const handleSportClick = (event: React.MouseEvent<HTMLDivElement>) => {
