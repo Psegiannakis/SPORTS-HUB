@@ -1,5 +1,5 @@
 <h1>Sports Hub</h1>
-<h2>A display of use of React and multiple use of APIs. Displays a selection of live sporting games, matches and scores.</h2>
+<h2>A demonstration of React and the integration of multiple APIs, showcasing live sporting events, including games, matches, and scores.</h2>
 <h3>To Run:</h3>
 <ul>
   <li>npm run dev</li>
